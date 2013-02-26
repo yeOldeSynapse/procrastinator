@@ -1,0 +1,70 @@
+{% extends "game/base.html" %}
+{% load staticfiles %}
+
+{% block gameover %}
+
+<div id="game-over">
+  <div>
+    <h3>Порочная дева показала вам<br>
+    всё, что скрыто</h3><br>
+    <a class="button" onclick="closeAlert()">Срам какой</a>
+  </div>
+</div>
+
+{% endblock gameover %}
+
+
+
+{% block hint %}
+
+<div id="hint">
+  <span>Играть заново?</span>
+</div>
+
+{% endblock hint %}
+
+
+
+{% block content-left %}
+
+<div id="diff">{{ diff }}</div>
+
+{% ifequal diff "easy" %}
+  {% for line in girl.txt.readlines %}
+    <div class="girl" id="girl-{{ forloop.revcounter }}">{{ line }}</div>
+  {% endfor %}
+{% endifequal %}
+
+{% ifequal diff "medium"  %}
+  {% for line in girl.txt.readlines %}
+    <div class="girl" id="girl-{% widthratio forloop.revcounter 1 2 %}">{{ line }}</div>
+  {% endfor %}
+{% endifequal %}
+
+{% ifequal diff "hard"  %}
+  {% for line in girl.txt.readlines %}
+    <div class="girl" id="girl-{% widthratio forloop.revcounter 1 3 %}">{{ line }}</div>
+  {% endfor %}
+{% endifequal %}
+
+{% endblock content-left %}
+
+
+
+{% block content-right %}
+
+<a class="button" id="play" onclick="showGirl()">Satisfaction</a>
+<div id="fact">
+  <h3>Интересный факт</h3>
+  {{ fact.content }}
+</div>
+
+{% endblock content-right %}
+
+
+
+{% block game-script %}
+
+<script type="text/javascript" src="{% static 'js/game.js' %}"></script>
+
+{% endblock game-script %}

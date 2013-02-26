@@ -1,0 +1,23 @@
+{% extends "game/base.html" %}
+
+{% block content-left %}
+
+<h2>Синопсис</h2><br>
+<ul>
+  <li>Нажимайте на кнопку</li>
+  <li>Наблюдайте результат</li>
+  <li>Повторите, при необходимости</li>
+</ul>
+<p><i>(хинт: if all else fails use finger)</i></p>
+<h2>Выберите сложность</h2><br>
+<form action="{% url game %}" method="post">
+  {% csrf_token %}
+  <ul class="diff-choice">
+    <li><input name="diff" value="easy" type="radio" checked>Я на диване</li>
+    <li><input name="diff" value="medium" type="radio">Хорошо, встаю</li>
+    <li><input name="diff" value="hard" type="radio">И мышь мне не жаль</li>
+    <li><input type="submit" value="Прокрастинировать" class="button"></li>
+  </ul>
+</form>
+
+{% endblock content-left %}
